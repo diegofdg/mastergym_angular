@@ -8,9 +8,7 @@
     <p>Cargando...</p>
   </div>
   
-  <div *ngIf="!cargando">
-    <p>Please login.</p>
-    <button (click)="login()">Login with Google</button>
+  <div *ngIf="!cargando">    
     <app-login></app-login>
   </div>  
 </ng-template>

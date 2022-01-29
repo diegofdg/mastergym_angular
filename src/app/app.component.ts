@@ -19,7 +19,7 @@ export class AppComponent {
         if(usuario!== null){
           this.cargando = true;
         }
-      }, 2000);
+      }, 1000);
     });
   }
 
