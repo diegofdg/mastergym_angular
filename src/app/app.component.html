@@ -1,4 +1,6 @@
 <div *ngIf="auth.user | async as user else showLogin">
+  <app-encabezado></app-encabezado>
+  <router-outlet></router-outlet>  
   <h1>Hello {{ user.email }}!</h1>
   <button (click)="logout()">Logout</button>
 </div>
@@ -13,5 +15,3 @@
     <app-login></app-login>
   </div>  
 </ng-template>
-
-<router-outlet></router-outlet>
