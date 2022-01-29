@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mastergym-98ebd": {
+      "hosting": {
+        "mastergym": [
+          "mastergym-98ebd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mastergym-98ebd"
+  }
+}

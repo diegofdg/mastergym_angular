@@ -106,6 +106,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "mastergym:build:production",
+            "firebaseProject": "mastergym-98ebd",
+            "firebaseHostingSite": "mastergym-98ebd"
+          }
         }
       }
     }
