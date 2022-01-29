@@ -4,8 +4,9 @@
 </div>
 
 <ng-template #showLogin>
-  <div *ngIf="cargando">
-    <p>Cargando...</p>
+  <div *ngIf="cargando" class="text-center">
+    <div><h3 class="cargando mt-3 mb-3">Cargando...</h3></div>    
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>    
   </div>
   
   <div *ngIf="!cargando">    

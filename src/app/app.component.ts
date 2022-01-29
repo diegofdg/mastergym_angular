@@ -17,7 +17,7 @@ export class AppComponent {
         if(usuario!== null){
           this.cargando = true;
         }
-      }, 1000);
+      }, 2000);
     });
   }
 

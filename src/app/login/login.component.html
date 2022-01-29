@@ -21,8 +21,11 @@
             </div>
         </div>
         <button type="submit" (click)="ingresar()" [disabled]="!formularioLogin.valid" class="btn btn-primary">Ingresar</button>
-      </form>
+    </form>
 
-      <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">{{textoError}}</div>
-                  
+    <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">{{textoError}}</div>
+
+    <ngx-spinner bdColor="#333" size="medium" color="#fff" type="ball-spin-clockwise-fade-rotating" [fullScreen]="true">
+        <p style="color: white">Ingresando al sistema...</p>
+    </ngx-spinner>
 </div>

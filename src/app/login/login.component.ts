@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   datosCorrectos: boolean = true;
   textoError: string = '';
 
-  constructor(private creadorFormulario: FormBuilder, public auth: AngularFireAuth) { }
+  constructor(private creadorFormulario: FormBuilder, public auth: AngularFireAuth, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.formularioLogin = this.creadorFormulario.group({
@@ -25,12 +26,15 @@ export class LoginComponent implements OnInit {
 
   ingresar() {
     if(this.formularioLogin.valid) {
-      this.datosCorrectos = true;
+      this.datosCorrectos = true;      
+      this.spinner.show();
       this.auth.signInWithEmailAndPassword(this.formularioLogin.value.email, this.formularioLogin.value.password)
       .then((usuario)=>{
+        this.spinner.hide();
         console.log(usuario);
       })
       .catch((error) => {
+        this.spinner.hide();
         console.log(this.formularioLogin.controls);
         console.log(error.message);
         if(error.message === 'Firebase: Error (auth/user-not-found).'){
