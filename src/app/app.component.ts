@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { user } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
@@ -8,10 +9,17 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class AppComponent {
   title = 'mastergym';
+  cargando:boolean = true;
 
-  constructor(public auth: AngularFireAuth) {
+    constructor(public auth: AngularFireAuth) {
     this.auth.user.subscribe((usuario) => {
-      console.log(usuario);      
+      setTimeout(()=> {
+        console.log(usuario);
+        this.cargando = false;
+        if(usuario!== null){
+          this.cargando = true;
+        }
+      }, 2000);
     });
   }
 
@@ -19,6 +27,7 @@ export class AppComponent {
     this.auth.signInWithEmailAndPassword('correo@correo.com', '123456');
   }
   logout() {
+    /* this.cargando = true; */
     this.auth.signOut();
   }
 }
