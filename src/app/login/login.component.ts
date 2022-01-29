@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   formularioLogin: FormGroup = new FormGroup({});
+  datosCorrectos: boolean = true;
+  textoError: string = '';
 
   constructor(private creadorFormulario: FormBuilder, public auth: AngularFireAuth) { }
 
@@ -23,15 +25,26 @@ export class LoginComponent implements OnInit {
 
   ingresar() {
     if(this.formularioLogin.valid) {
+      this.datosCorrectos = true;
       this.auth.signInWithEmailAndPassword(this.formularioLogin.value.email, this.formularioLogin.value.password)
       .then((usuario)=>{
-        console.log(usuario);       
-      }).catch((error)=>{
-        console.log('Por favor revisa que los datos esten correctos');       
+        console.log(usuario);
+      })
+      .catch((error) => {
+        console.log(this.formularioLogin.controls);
+        console.log(error.message);
+        if(error.message === 'Firebase: Error (auth/user-not-found).'){
+          this.datosCorrectos = false;
+          this.textoError = 'No existe ningún usuario registrado con ese correo.';
+        } else if(error.message === 'Firebase: Error (auth/wrong-password).') {
+          this.datosCorrectos = false;
+          this.textoError = 'El password ingresado es incorrecto.';          
+        }
       });
       
     } else {
-      console.log('Algo pasó');
-    }    
+      this.datosCorrectos = false;
+      this.textoError = 'Por favor revisa que los datos estén correctos';
+    }
   }
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
@@ -14,7 +13,6 @@ export class AppComponent {
     constructor(public auth: AngularFireAuth) {
     this.auth.user.subscribe((usuario) => {
       setTimeout(()=> {
-        console.log(usuario);
         this.cargando = false;
         if(usuario!== null){
           this.cargando = true;
@@ -27,7 +25,6 @@ export class AppComponent {
     this.auth.signInWithEmailAndPassword('correo@correo.com', '123456');
   }
   logout() {
-    /* this.cargando = true; */
     this.auth.signOut();
   }
 }
