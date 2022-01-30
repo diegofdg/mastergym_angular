@@ -8,48 +8,17 @@
     </form>    
 
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3" *ngFor="let cliente of clientes$ | async">
             <div class="card">
-                <img class="card-img-top imgCliente" src="https://th.bing.com/th/id/R.7823e4bde4697ea430dd2788c3afd53a?rik=Xim3UfUzydEWxA&pid=ImgRaw&r=0" alt="imagen cliente">
+                <img class="card-img-top imgCliente" [src]="cliente.imgUrl" alt="imagen cliente">
                 <div class="card-body">
-                    <h5 class="card-title">Juan Martinez</h5>
-                    <a href="#" class="card-link">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
+                    <h5 class="card-title text-center">{{cliente.nombre}} {{cliente.apellido}}</h5>
+                    <div class="d-flex justify-content-around">
+                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a href="#" class="btn btn-danger">Desactivar</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top imgCliente" src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png" alt="imagen cliente">
-                <div class="card-body">
-                    <h5 class="card-title">Jose Perez</h5>
-                    <a href="#" class="card-link">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top imgCliente" src="https://th.bing.com/th/id/OIP.gO76gg1bx2BHe8n6DBxSfQHaHa?pid=ImgDet&rs=1" alt="imagen cliente">
-                <div class="card-body">
-                    <h5 class="card-title">Roberto Diaz</h5>
-                    <a href="#" class="card-link">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top imgCliente" src="https://th.bing.com/th/id/R.c6b2b30d0e4d56dffe9733b55f4684dd?rik=mYmhtQslHAMp9A&pid=ImgRaw&r=0" alt="imagen cliente">
-                <div class="card-body">
-                    <h5 class="card-title">Pedro Gonzalez</h5>
-                    <a href="#" class="card-link">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>        
     </div>
 </div>
