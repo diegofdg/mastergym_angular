@@ -20,7 +20,7 @@
                 <span *ngIf="formularioLogin.controls['password'].hasError('required')"> Password es requerido</span>
             </div>
         </div>
-        <button type="submit" (click)="ingresar()" [disabled]="!formularioLogin.valid" class="btn btn-primary">Ingresar</button>
+        <button (click)="ingresar()" [disabled]="!formularioLogin.valid" class="btn btn-primary">Ingresar</button>
     </form>
 
     <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">{{textoError}}</div>
