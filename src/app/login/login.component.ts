@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
       this.auth.signInWithEmailAndPassword(this.formularioLogin.value.email, this.formularioLogin.value.password)
       .then((usuario)=>{
         this.spinner.hide();
-        console.log(usuario);
       })
       .catch((error) => {
         this.spinner.hide();

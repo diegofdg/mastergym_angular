@@ -8,12 +8,15 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class AppComponent {
   title = 'mastergym';
+  user: any = {};
   cargando:boolean = true;
 
     constructor(public auth: AngularFireAuth) {
     this.auth.user.subscribe((usuario) => {
       setTimeout(()=> {
         this.cargando = false;
+        this.user = usuario;
+        console.log(this.user);
         if(usuario!== null){
           this.cargando = true;
         }
@@ -21,10 +24,10 @@ export class AppComponent {
     });
   }
 
-  login() {
+  /* login() {
     this.auth.signInWithEmailAndPassword('correo@correo.com', '123456');
   }
   logout() {
     this.auth.signOut();
-  }
+  } */
 }
