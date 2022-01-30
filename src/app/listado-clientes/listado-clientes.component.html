@@ -12,7 +12,8 @@
             <div class="card">
                 <img class="card-img-top imgCliente" [src]="cliente.imgUrl" alt="imagen cliente">
                 <div class="card-body">
-                    <h5 class="card-title text-center">{{cliente.nombre}} {{cliente.apellido}}</h5>
+                    <p class="text-center"><small>{{cliente.id}}</small></p>
+                    <h5 class="card-title text-center">{{cliente.nombre}} {{cliente.apellido}}</h5>                    
                     <div class="d-flex justify-content-around">
                         <a href="#" class="btn btn-primary">Editar</a>
                         <a href="#" class="btn btn-danger">Desactivar</a>
@@ -20,5 +21,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </div>

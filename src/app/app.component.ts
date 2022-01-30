@@ -16,18 +16,10 @@ export class AppComponent {
       setTimeout(()=> {
         this.cargando = false;
         this.user = usuario;
-        console.log(this.user);
-        if(usuario!== null){
+        if(usuario!== null) {
           this.cargando = true;
         }
       }, 2000);
     });
   }
-
-  /* login() {
-    this.auth.signInWithEmailAndPassword('correo@correo.com', '123456');
-  }
-  logout() {
-    this.auth.signOut();
-  } */
 }
