@@ -71,7 +71,8 @@
                     <div class="progress-bar progress-bar-striped bg-danger" id="barra" role="progressbar" style="width: 0%" aria-valuenow="porcentajeSubida" aria-valuemin="0" aria-valuemax="100">{{porcentajeSubida}}</div>
                 </div>
             </div>
-        </div>
-        <button class="btn btn-primary" (click)="agregar()" [disabled]="!formularioCliente.valid">Agregar</button>
+        </div>        
+            <button *ngIf="!esEditable" class="btn btn-primary" [disabled]="formularioCliente.invalid && !urlImagen" (click)="agregar()">Agregar</button>
+            <button *ngIf="esEditable" class="btn btn-primary" [disabled]="formularioCliente.invalid && !urlImagen" (click)="editar()">Editar</button>        
     </form>
 </div>

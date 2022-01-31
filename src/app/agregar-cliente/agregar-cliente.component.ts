@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,6 +13,8 @@ export class AgregarClienteComponent implements OnInit {
   formularioCliente: FormGroup = new FormGroup({});
   porcentajeSubida: Number = 0;
   urlImagen: string = '';
+  esEditable: boolean = false;
+  id: string = '';
   
   constructor(private fb: FormBuilder, private storage: AngularFireStorage, private afs: AngularFirestore, private activeRoute: ActivatedRoute) { }
 
@@ -29,23 +31,27 @@ export class AgregarClienteComponent implements OnInit {
       imgUrl: ['', Validators.required]
     });
 
-    let id = this.activeRoute.snapshot.params['clienteID'];
-    
-    this.afs.doc<any>('clientes' +'/' +  id ).valueChanges().subscribe((cliente)=>{
-      console.log(cliente);
-      this.formularioCliente.setValue({
-        nombre: cliente.nombre,
-        apellido: cliente.apellido,
-        correo: cliente.correo,
-        fechaNacimiento: new Date(cliente.fechaNacimiento.seconds * 1000).toISOString().slice(0,10),
-        telefono: cliente.telefono,
-        cedula: cliente.cedula,
-        imgUrl: ''
+    this.id = this.activeRoute.snapshot.params['clienteID'];    
+
+    if(this.id !== undefined) {
+      this.esEditable = true;     
+
+      this.afs.doc<any>('clientes' +'/' +  this.id ).valueChanges().subscribe((cliente)=>{
+        console.log(cliente);
+        this.formularioCliente.setValue({
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          correo: cliente.correo,
+          fechaNacimiento: new Date(cliente.fechaNacimiento.seconds * 1000).toISOString().slice(0,10),
+          telefono: cliente.telefono,
+          cedula: cliente.cedula,
+          imgUrl: ''
+        });
+  
+        this.urlImagen = cliente.imgUrl;
+  
       });
-
-      this.urlImagen = cliente.imgUrl;
-
-    });
+    }    
   }
 
   agregar() {
@@ -55,6 +61,18 @@ export class AgregarClienteComponent implements OnInit {
     this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
       console.log('registro creado');      
     });
+  }
+
+  editar() {
+    this.formularioCliente.value.imgUrl = this.urlImagen;
+    this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento );
+    
+    this.afs.doc<any>('clientes/' +  this.id ).update(this.formularioCliente.value).then((resultado)=>{    
+      console.log('Actualizado correctamente');      
+    }).catch(()=>{
+     console.log('Ocurrio algún error');
+    })
+
   }
 
   subirImagen(event:any) {
