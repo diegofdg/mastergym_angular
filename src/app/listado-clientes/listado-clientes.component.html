@@ -15,7 +15,7 @@
                     <p class="text-center"><small>{{cliente.id}}</small></p>
                     <h5 class="card-title text-center">{{cliente.nombre}} {{cliente.apellido}}</h5>                    
                     <div class="d-flex justify-content-around">
-                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a [routerLink]="['/agregar-cliente/', cliente.id]" class="btn btn-primary">Editar</a>
                         <a href="#" class="btn btn-danger">Desactivar</a>
                     </div>
                 </div>

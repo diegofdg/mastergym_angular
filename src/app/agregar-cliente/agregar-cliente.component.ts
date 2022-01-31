@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -13,7 +14,7 @@ export class AgregarClienteComponent implements OnInit {
   porcentajeSubida: Number = 0;
   urlImagen: string = '';
   
-  constructor(private fb: FormBuilder, private storage: AngularFireStorage, private afs: AngularFirestore) { }
+  constructor(private fb: FormBuilder, private storage: AngularFireStorage, private afs: AngularFirestore, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.formularioCliente = this.fb.group({
@@ -26,6 +27,24 @@ export class AgregarClienteComponent implements OnInit {
       fechaNacimiento: ['', Validators.required],
       telefono: [''],
       imgUrl: ['', Validators.required]
+    });
+
+    let id = this.activeRoute.snapshot.params['clienteID'];
+    
+    this.afs.doc<any>('clientes' +'/' +  id ).valueChanges().subscribe((cliente)=>{
+      console.log(cliente);
+      this.formularioCliente.setValue({
+        nombre: cliente.nombre,
+        apellido: cliente.apellido,
+        correo: cliente.correo,
+        fechaNacimiento: new Date(cliente.fechaNacimiento.seconds * 1000).toISOString().slice(0,10),
+        telefono: cliente.telefono,
+        cedula: cliente.cedula,
+        imgUrl: ''
+      });
+
+      this.urlImagen = cliente.imgUrl;
+
     });
   }
 
