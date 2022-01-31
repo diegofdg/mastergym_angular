@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
 import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.compo
     ReactiveFormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    AngularFireStorageModule
   ],
   providers: [
     ScreenTrackingService,

@@ -59,7 +59,7 @@
             <div class="col-sm-12">
                 <div class="mb-3">
                     <label for="" class="form-label">Imagen</label>
-                    <input type="file" class="form-control" formControlName="imgUrl" placeholder="Agregue su imagen">
+                    <input type="file" (change)="subirImagen($event)" class="form-control" formControlName="imgUrl" placeholder="Agregue su imagen">
                     <div *ngIf="formularioCliente.controls['imgUrl'].invalid && formularioCliente.controls['imgUrl'].touched" class="alert alert-danger" role="alert">
                         <span *ngIf="formularioCliente.controls['imgUrl'].hasError('required')">La imagen es requerida</span>
                     </div>
@@ -68,7 +68,7 @@
 
             <div class="container-fluid">                
                 <div class="progress col-sm-12 mb-3">
-                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    <div class="progress-bar progress-bar-striped bg-danger" id="barra" role="progressbar" style="width: 0%" aria-valuenow="porcentajeSubida" aria-valuemin="0" aria-valuemax="100">{{porcentajeSubida}}</div>
                 </div>
             </div>
         </div>
