@@ -1,0 +1,42 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4>Precios</h4>
+            <ul>
+                <li>Precio por semana</li>
+                <li>Precio por men</li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <h4>Agregar/Editar</h4>
+            <form>
+                <div>
+                    <label for="">Nombre</label>
+                    <input formControlName="nombre" class="form-control" type="text">
+                </div>
+
+                <div>
+                    <label for="">Costo</label>
+                    <input formControlName="costo" class="form-control" type="number">
+                </div>
+
+                <div>
+                    <label for="">Duración</label>
+                    <input formControlName="duracion" class="form-control" type="number">
+                </div>
+                <div>
+                    <label for="">Tipo Duración</label>
+                    <select formControlName="tipoDuracion" class="form-select" aria-label="opciones tipo duracion" name="" id="">
+                        <option value="1">Día</option>
+                        <option value="2">Semana</option>
+                        <option value="3">Quincena</option>
+                        <option value="4">Mes</option>
+                        <option value="5">Año</option>
+                    </select>
+                </div>   
+                <button class="btn btn-primary">Agregar</button>
+                <button class="btn btn-danger">Editar</button>             
+            </form>
+        </div>
+    </div>
+</div>
