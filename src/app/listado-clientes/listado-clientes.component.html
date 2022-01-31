@@ -8,7 +8,7 @@
     </form>    
 
     <div class="row">
-        <div class="col-sm-3" *ngFor="let cliente of clientes$ | async">
+        <div class="col-sm-3" *ngFor="let cliente of clientes">        
             <div class="card">
                 <img class="card-img-top imgCliente" [src]="cliente.imgUrl" alt="imagen cliente">
                 <div class="card-body">

@@ -3,7 +3,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import Swal from 'sweetalert2';
 import { MensajesService } from '../services/mensajes.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class AgregarClienteComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private storage: AngularFireStorage, 
-    private afs: AngularFirestore, 
+    private db: AngularFirestore, 
     private activeRoute: ActivatedRoute,
     private msj: MensajesService
     ) { }
@@ -44,7 +43,7 @@ export class AgregarClienteComponent implements OnInit {
     if(this.id !== undefined) {
       this.esEditable = true;     
 
-      this.afs.doc<any>('clientes' +'/' +  this.id ).valueChanges().subscribe((cliente)=>{
+      this.db.doc<any>('clientes' +'/' +  this.id ).valueChanges().subscribe((cliente)=>{
         console.log(cliente);
         this.formularioCliente.setValue({
           nombre: cliente.nombre,
@@ -64,8 +63,7 @@ export class AgregarClienteComponent implements OnInit {
   agregar() {
     this.formularioCliente.value.imgUrl = this.urlImagen;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento );
-    console.log(this.formularioCliente.value)
-    this.afs.collection('clientes').add(this.formularioCliente.value)
+    this.db.collection('clientes').add(this.formularioCliente.value)
       .then(()=>{
         this.msj.mostrarMensaje('Agregado!', 'Se agregó correctamente', 'success');      
     });
@@ -75,7 +73,7 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.imgUrl = this.urlImagen;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento );
     
-    this.afs.doc<any>('clientes/' +  this.id ).update(this.formularioCliente.value)
+    this.db.doc<any>('clientes/' +  this.id ).update(this.formularioCliente.value)
       .then(()=>{
         this.msj.mostrarMensaje('Editado!', 'Se editó correctamente', 'success');
       })

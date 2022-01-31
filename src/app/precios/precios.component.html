@@ -3,13 +3,12 @@
         <div class="col-sm-8">
             <h4>Precios</h4>
             <ul>
-                <li>Precio por semana</li>
-                <li>Precio por men</li>
+                <li *ngFor="let precio of precios"> {{precio.nombre}}</li>
             </ul>
         </div>
         <div class="col-sm-4">
             <h4>Agregar/Editar</h4>
-            <form>
+            <form [formGroup]="formularioPrecio">
                 <div>
                     <label for="">Nombre</label>
                     <input formControlName="nombre" class="form-control" type="text">
@@ -34,8 +33,8 @@
                         <option value="5">Año</option>
                     </select>
                 </div>   
-                <button class="btn btn-primary">Agregar</button>
-                <button class="btn btn-danger">Editar</button>             
+                <button [disabled]="formularioPrecio.invalid" class="btn btn-primary" (click)="agregar()">Agregar</button>
+                <button [disabled]="formularioPrecio.invalid" class="btn btn-danger">Editar</button>             
             </form>
         </div>
     </div>
