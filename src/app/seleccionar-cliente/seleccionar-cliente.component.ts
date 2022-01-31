@@ -25,4 +25,14 @@ export class SeleccionarClienteComponent implements OnInit {
     });
   }
 
+  buscarClientes(e:any){
+    let nombre:string = e.target.value;
+    this.clientes.forEach((cliente) => {
+      if(cliente.nombre.toLowerCase().includes(nombre.toLowerCase())) {
+        cliente.visible = true;
+      } else {
+        cliente.visible = false;
+      }
+    });
+  }
 }
