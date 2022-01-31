@@ -7,6 +7,16 @@
                 (canceloCliente)="eliminarCliente()"
             >
             </app-seleccionar-cliente>
+
+            <div>
+                <label for="">Precio</label>
+                    <select class="form-select" aria-label="seleccionar precio" name="" id="">
+                        <option *ngFor="let precio of precios" value=""> {{precio.nombre}}</option>
+                    </select>
+            </div>
+
+            <br><br><br><br><br><br>
+
             <button class="btn btn-primary" (click)="guardar()">Guardar</button>
         </div>
         <div class="col-sm-6">
