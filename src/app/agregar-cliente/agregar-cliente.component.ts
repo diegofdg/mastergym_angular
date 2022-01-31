@@ -3,6 +3,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { MensajesService } from '../services/mensajes.service';
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -16,7 +18,13 @@ export class AgregarClienteComponent implements OnInit {
   esEditable: boolean = false;
   id: string = '';
   
-  constructor(private fb: FormBuilder, private storage: AngularFireStorage, private afs: AngularFirestore, private activeRoute: ActivatedRoute) { }
+  constructor(
+    private fb: FormBuilder, 
+    private storage: AngularFireStorage, 
+    private afs: AngularFirestore, 
+    private activeRoute: ActivatedRoute,
+    private msj: MensajesService
+    ) { }
 
   ngOnInit(): void {
     this.formularioCliente = this.fb.group({
@@ -48,8 +56,7 @@ export class AgregarClienteComponent implements OnInit {
           imgUrl: ''
         });
   
-        this.urlImagen = cliente.imgUrl;
-  
+        this.urlImagen = cliente.imgUrl;  
       });
     }    
   }
@@ -58,8 +65,9 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.imgUrl = this.urlImagen;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento );
     console.log(this.formularioCliente.value)
-    this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
-      console.log('registro creado');      
+    this.afs.collection('clientes').add(this.formularioCliente.value)
+      .then(()=>{
+        this.msj.mostrarMensaje('Agregado!', 'Se agregó correctamente', 'success');      
     });
   }
 
@@ -67,12 +75,13 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.imgUrl = this.urlImagen;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento );
     
-    this.afs.doc<any>('clientes/' +  this.id ).update(this.formularioCliente.value).then((resultado)=>{    
-      console.log('Actualizado correctamente');      
-    }).catch(()=>{
-     console.log('Ocurrio algún error');
-    })
-
+    this.afs.doc<any>('clientes/' +  this.id ).update(this.formularioCliente.value)
+      .then(()=>{
+        this.msj.mostrarMensaje('Editado!', 'Se editó correctamente', 'success');
+      })
+      .catch(()=>{
+        this.msj.mostrarMensaje('Error!', 'Ocurrió un error', 'success');
+      })
   }
 
   subirImagen(event:any) {

@@ -24,6 +24,7 @@ import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
 import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { MensajesService } from './services/mensajes.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
   providers: [
     ScreenTrackingService,
     UserTrackingService,
-    AngularFireAuth
+    AngularFireAuth,
+    MensajesService
   ],
   bootstrap: [AppComponent]
 })
