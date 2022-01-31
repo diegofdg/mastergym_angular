@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Cliente } from '../models/Cliente';
 
@@ -9,7 +9,9 @@ import { Cliente } from '../models/Cliente';
 })
 export class SeleccionarClienteComponent implements OnInit {
   clientes: Cliente[] = new Array<Cliente>();
-  @Input('nombre')  nombre: string = '';  
+  @Input('nombre')  nombre: string = '';
+  @Output('seleccionoCliente') seleccionoCliente = new EventEmitter();
+  @Output('canceloCliente') canceloCliente = new EventEmitter();
 
   constructor(private db: AngularFirestore) { }
 
@@ -42,9 +44,11 @@ export class SeleccionarClienteComponent implements OnInit {
     this.clientes.forEach((cliente)=>{
       cliente.visible = false;
     });
+    this.seleccionoCliente.emit(cliente);
   }
 
   cancelarCliente() {
-    this.nombre = '';    
+    this.nombre = '';
+    this.canceloCliente.emit();
   }
 }

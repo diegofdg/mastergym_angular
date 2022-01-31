@@ -1,7 +1,13 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-6">
-            <app-seleccionar-cliente></app-seleccionar-cliente>
+            <app-seleccionar-cliente
+                [nombre]="clienteSeleccionado.nombre"
+                (seleccionoCliente)="asignarCliente($event)"
+                (canceloCliente)="eliminarCliente()"
+            >
+            </app-seleccionar-cliente>
+            <button class="btn btn-primary" (click)="guardar()">Guardar</button>
         </div>
         <div class="col-sm-6">
             <p>Otra columna</p>            

@@ -11,4 +11,6 @@ export class Cliente{
     cedula: string = '';
     ref: DocumentReference | undefined;
     visible: boolean = false;
+
+    constructor() { }
 }

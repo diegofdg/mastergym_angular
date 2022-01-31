@@ -7,4 +7,6 @@ export class Precio{
     duracion: number = 0;
     tipoDuracion:number = 0;
     ref: DocumentReference | undefined;
+
+    constructor() { }
 }
