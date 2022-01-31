@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Cliente } from '../models/Cliente';
 
@@ -9,6 +9,7 @@ import { Cliente } from '../models/Cliente';
 })
 export class SeleccionarClienteComponent implements OnInit {
   clientes: Cliente[] = new Array<Cliente>();
+  @Input('nombre')  nombre: string = '';  
 
   constructor(private db: AngularFirestore) { }
 
@@ -34,5 +35,16 @@ export class SeleccionarClienteComponent implements OnInit {
         cliente.visible = false;
       }
     });
+  }
+
+  seleccionarCliente(cliente:Cliente) {
+    this.nombre = cliente.nombre + ' ' + cliente.apellido;
+    this.clientes.forEach((cliente)=>{
+      cliente.visible = false;
+    });
+  }
+
+  cancelarCliente() {
+    this.nombre = '';    
   }
 }
