@@ -13,14 +13,11 @@ export class ListadoInscripcionesComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit(): void {
-    /* this.inscripciones.length = 0; */
+    this.inscripciones.length = 0;
     this.db.collection<Inscripcion>('inscripciones').get().subscribe((resultado)=>{
       resultado.forEach((inscripcion)=>{
-        /* console.log(inscripcion.data()); */
-        
         let inscripcionObtenida:any = inscripcion.data() as Inscripcion;
-        inscripcionObtenida.id = inscripcion.id;
-        console.log(inscripcionObtenida);
+        inscripcionObtenida.id = inscripcion.id;        
         
         this.db.doc(inscripcionObtenida.cliente.path).get().subscribe((cliente)=>{
           inscripcionObtenida.clienteObtenido = cliente.data();
@@ -28,10 +25,9 @@ export class ListadoInscripcionesComponent implements OnInit {
           inscripcionObtenida.fechaFinal = new Date(inscripcionObtenida.fechaFinal.seconds *1000);
           
           this.inscripciones.push(inscripcionObtenida);
-          console.log(this.inscripciones)
-        })
-      })
-    })
+          console.log(this.inscripciones);
+        });
+      });
+    });
   }
-
 }
