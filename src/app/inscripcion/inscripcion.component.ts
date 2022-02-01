@@ -47,6 +47,40 @@ export class InscripcionComponent implements OnInit {
     const id = event.target.value;
     this.precioSeleccionado = this.precios.find(x => x.id == id);
     this.inscripcion.precios = this.precioSeleccionado.ref;
-  }
+    this.inscripcion.fecha = new Date();
 
+    if(this.precioSeleccionado.tipoDuracion == 1) {
+      let dias: number = this.precioSeleccionado.duracion;
+      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+    
+    if(this.precioSeleccionado.tipoDuracion == 2) {
+      let dias: number = this.precioSeleccionado.duracion * 7;
+      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+    if(this.precioSeleccionado.tipoDuracion == 3) {
+      let dias: number = this.precioSeleccionado.duracion * 15;
+      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+    if(this.precioSeleccionado.tipoDuracion == 4) {
+      let anio: number = this.inscripcion.fecha.getFullYear();
+      let meses = this.precioSeleccionado.duracion + this.inscripcion.fecha.getMonth();
+      let dia: number = this.inscripcion.fecha.getDate();
+      let fechaFinal = new Date(anio, meses, dia);
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+    if(this.precioSeleccionado.tipoDuracion == 5) {
+      let anio: number = this.inscripcion.fecha.getFullYear() + this.precioSeleccionado.duracion;
+      let meses = this.inscripcion.fecha.getMonth();
+      let dia: number = this.inscripcion.fecha.getDate();
+      let fechaFinal = new Date(anio, meses, dia);
+      this.inscripcion.fechaFinal = fechaFinal;
+    }        
+  }
 }
