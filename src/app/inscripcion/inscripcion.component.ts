@@ -12,6 +12,7 @@ import { Precio } from '../models/Precio';
 export class InscripcionComponent implements OnInit {
   inscripcion: Inscripcion = new Inscripcion();
   clienteSeleccionado: Cliente = new Cliente();
+  precioSeleccionado: any = new Precio();
   nombre: undefined;
   precios: Precio[] = new Array< Precio>();
 
@@ -24,8 +25,8 @@ export class InscripcionComponent implements OnInit {
         precio.id = item.id;
         precio.ref = item.ref;
         this.precios.push(precio)
-      })
-    })
+      });
+    });
   }
 
   asignarCliente(cliente: Cliente) {
@@ -40,6 +41,12 @@ export class InscripcionComponent implements OnInit {
 
   guardar() {
     console.log(this.inscripcion);    
+  }
+
+  selecionarPrecio(event: any) {
+    const id = event.target.value;
+    this.precioSeleccionado = this.precios.find(x => x.id == id);
+    this.inscripcion.precios = this.precioSeleccionado.ref;
   }
 
 }

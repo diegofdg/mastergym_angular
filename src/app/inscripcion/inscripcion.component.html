@@ -10,8 +10,9 @@
 
             <div>
                 <label for="">Precio</label>
-                    <select class="form-select" aria-label="seleccionar precio" name="" id="">
-                        <option *ngFor="let precio of precios" value=""> {{precio.nombre}}</option>
+                    <select (change)="selecionarPrecio($event)" class="form-select" aria-label="seleccionar precio" name="" id="">
+                        <option [value]="null" selected disabled>Seleccione un precio</option>
+                        <option *ngFor="let precio of precios" [value]="precio.id"> {{precio.nombre}}</option>
                     </select>
             </div>
 
