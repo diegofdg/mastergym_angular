@@ -49,6 +49,10 @@ export class InscripcionComponent implements OnInit {
     this.inscripcion.precios = this.precioSeleccionado.ref;
     this.inscripcion.fecha = new Date();
 
+    this.inscripcion.subTotal = this.precioSeleccionado.costo;
+    this.inscripcion.iva = this.inscripcion.subTotal * 0.21;
+    this.inscripcion.total = this.inscripcion.subTotal  + this.inscripcion.iva;
+
     if(this.precioSeleccionado.tipoDuracion == 1) {
       let dias: number = this.precioSeleccionado.duracion;
       let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate() + dias);

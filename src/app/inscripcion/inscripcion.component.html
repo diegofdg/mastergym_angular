@@ -24,12 +24,12 @@
             </div>
 
             <div class="from-control">
-                <label for="">Sub Total</label>
+                <label for="">SubTotal</label>
                 <input class="form-control" [value]="inscripcion.subTotal" type="number" disabled>
             </div>
 
             <div class="from-control">
-                <label for="">ISV</label>
+                <label for="">IVA</label>
                 <input class="form-control" [value]="inscripcion.iva" type="number" disabled>
             </div>
 
@@ -37,14 +37,13 @@
                 <label for="">Total</label>
                 <input class="form-control" [value]="inscripcion.total" type="number" disabled>
             </div>
-
-
-            <br>
-
-            <button class="btn btn-primary" (click)="guardar()">Guardar</button>
+            
+            <button class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
         </div>
         <div class="col-sm-6">
-            <p>Otra columna</p>            
+            <div *ngIf="clienteSeleccionado.imgUrl" class="imgCliente">
+                <img [src]="clienteSeleccionado.imgUrl" alt="">
+            </div>
         </div>
     </div>
 </div>
