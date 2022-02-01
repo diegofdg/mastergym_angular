@@ -42,7 +42,6 @@ export class InscripcionComponent implements OnInit {
   }
 
   guardar() {
-    console.log(this.inscripcion);    
     if(this.inscripcion.validar().esValido) {
       let inscripcionAgregar = {
         fecha: this.inscripcion.fecha,
